@@ -1,0 +1,50 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.66.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 1b629a174d07be3495c79b53c0adbe1a79089522 Changes
+SHA1 598f87f072f66e2269dd6919292b2934dbb20492 LICENSE
+SHA1 f44742cfa4d6c26a3b45ee48a1ba6e9c97a29394 MANIFEST
+SHA1 afea3901185d2479cee4a2009fd54a6ed64d74d4 META.yml
+SHA1 4e69ec1ed35deacfae1c4a55c4b337b247d0b9aa Makefile.PL
+SHA1 ad7c845a7623a36fb7ca97b030fb2851af59035d README
+SHA1 8c1cb59f3c38d1e79c5176251e22f0d099151d6b lib/WWW/Wookie.pm
+SHA1 13d11339890d9f3f64b98b26818516584baaba11 lib/WWW/Wookie/Connector/Exceptions.pm
+SHA1 e9a45e634a429c6473a76e4f7009d72e2c645af9 lib/WWW/Wookie/Connector/Service.pm
+SHA1 33475afa2243c4d1940a7a923ae8e523ca4b2773 lib/WWW/Wookie/Connector/Service/Interface.pm
+SHA1 7a6343fc8a17f470efc2e187fb71490b62778971 lib/WWW/Wookie/Server/Connection.pm
+SHA1 9d90324d163f5f82b349ecb2af3ab9e06154f4ca lib/WWW/Wookie/User.pm
+SHA1 352b0b7f3cac8b3a901d99e55b573dea4d43f838 lib/WWW/Wookie/Widget.pm
+SHA1 06b98319bbd750d55a215f3d9857cc05202c1539 lib/WWW/Wookie/Widget/Instance.pm
+SHA1 91d398a8b3a73744b2fc116b03cc6fc25bc8d7df lib/WWW/Wookie/Widget/Instances.pm
+SHA1 104d7f49d50d618809538521dfb2f46286e9f644 lib/WWW/Wookie/Widget/Property.pm
+SHA1 d0893c88929ba741a9efe846ed0f22703122211e scripts/TestWookieService.pl
+SHA1 cd376076f586f5b6d5a838317948899713db4462 t/00_base.t
+SHA1 2a3e8d692d5cf51de8fa004091522b84828b1f18 t/00_signature.t
+SHA1 04e2d584c560ac14a3208a62d11c04a7379eae13 t/09_pod.t
+SHA1 61cc6e20e7f434f4fcbd9d8c83fc42ae0bbf34d6 t/10_pod-coverage.t
+SHA1 39e50c7a2179521b126266b7ccfd78432ea698a8 t/11_test-coverage.t
+SHA1 b3da53267111d035570bb7e16aa5c150e1803e2f t/12_manifest.t
+SHA1 5c1f4ec2d021b4cb1800326a34adff7020ca852e t/13_critic.t
+SHA1 21e64e63cc17a9c0fadb7bce7c63b8439c118fd3 t/14_kwalitee.t
+SHA1 4861952400ab647581a64895f1bceeb4477358e6 t/15_spell.t
+SHA1 35865a0caae03104bc29c21ae34769c557e30145 t/perlcriticrc
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+iEYEARECAAYFAkzUlEsACgkQr7H9zeGP1tWvxQCfdvVlCO/6ndiPKUI/eKibZPC+
+sBsAnA2evDo/1AKXg96MBQVczM2tG46M
+=0Ql1
+-----END PGP SIGNATURE-----
