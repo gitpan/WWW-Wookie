@@ -2,15 +2,15 @@ package WWW::Wookie::Widget::Instances;   # -*- cperl; cperl-indent-level: 4 -*-
 use strict;
 use warnings;
 
-# $Id: Instances.pm 347 2010-11-05 15:06:12Z roland $
-# $Revision: 347 $
+# $Id: Instances.pm 357 2010-11-07 10:53:18Z roland $
+# $Revision: 357 $
 # $HeadURL: svn+ssh://ipenburg.xs4all.nl/srv/svnroot/barclay/trunk/lib/WWW/Wookie/Widget/Instances.pm $
-# $Date: 2010-11-05 16:06:12 +0100 (Fri, 05 Nov 2010) $
+# $Date: 2010-11-07 11:53:18 +0100 (Sun, 07 Nov 2010) $
 
 use utf8;
 use 5.006000;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use Moose qw/around has/;
 use MooseX::AttributeHelpers;
@@ -52,16 +52,16 @@ __END__
 =head1 NAME
 
 WWW::Wookie::Widget::Instances - A collection of known widget instances
-available to a host.
+available to a host
 
 =head1 VERSION
 
-This document describes WWW::Wookie::Widget::Instances version 0.0.1
+This document describes WWW::Wookie::Widget::Instances version 0.0.2
 
 =head1 SYNOPSIS
 
     use WWW::Wookie::Widget::Instances;
-	$i = WWW::Wookie::Widget::Instances->new();
+    $i = WWW::Wookie::Widget::Instances->new();
 
 =head1 DESCRIPTION
 
@@ -77,7 +77,7 @@ Record an instance of the given widget.
 
 =over
 
-=item instance of widget as
+=item 1. Instance of widget as
 L<WWW::Wookie::Widget::Instance|WWW::Wookie::Widget::Instance> object
 
 =back
@@ -100,6 +100,9 @@ L<WWW::Wookie::Widget::Instance|WWW::Wookie::Widget::Instance>
 =head1 DIAGNOSTICS
 
 =head1 BUGS AND LIMITATIONS
+
+Please report any bugs or feature requests at L<RT for
+rt.cpan.org|https://rt.cpan.org/Dist/Display.html?Queue=WWW-Wookie>.
 
 =head1 AUTHOR
 

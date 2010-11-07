@@ -2,15 +2,15 @@ package WWW::Wookie::Connector::Service;  # -*- cperl; cperl-indent-level: 4 -*-
 use strict;
 use warnings;
 
-# $Id: Service.pm 351 2010-11-05 23:02:40Z roland $
-# $Revision: 351 $
+# $Id: Service.pm 357 2010-11-07 10:53:18Z roland $
+# $Revision: 357 $
 # $HeadURL: svn+ssh://ipenburg.xs4all.nl/srv/svnroot/barclay/trunk/lib/WWW/Wookie/Connector/Service.pm $
-# $Date: 2010-11-06 00:02:40 +0100 (Sat, 06 Nov 2010) $
+# $Date: 2010-11-07 11:53:18 +0100 (Sun, 07 Nov 2010) $
 
 use utf8;
 use 5.006000;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use CGI;
 use Exception::Class;
@@ -108,27 +108,18 @@ sub getProperty {
 ## use critic
     my ( $self, $widget_instance, $property_instance ) = @_;
     my $url = $self->getConnection()->getURL() . $PROPERTIES;
-    if ( !ref $widget_instance ne q{WWW::Wookie::Widget::Instance} ) {
+    if ( ref $widget_instance ne q{WWW::Wookie::Widget::Instance} ) {
         ## no critic qw(RequireExplicitInclusion)
         WookieWidgetInstanceException->throw(
             error => $ERR{NO_WIDGET_INSTANCE} );
         ## use critic
     }
-    if ( !ref $property_instance ne q{WWW::Wookie::Property} ) {
+    if ( ref $property_instance ne q{WWW::Wookie::Widget::Property} ) {
         ## no critic qw(RequireExplicitInclusion)
         WookieConnectorException->throw(
             error => $ERR{NO_PROPERTIES_INSTANCE} );
         ## use critic
     }
-    my $request = CGI->new(
-        {
-            'api_key'       => $self->getConnection()->getApiKey(),
-            'shareddatakey' => $self->getConnection()->getSharedDataKey(),
-            'userid'        => $self->getUser()->getLoginName(),
-            'widgetid'      => $widget_instance->getIdentifier(),
-            'propertyname'  => $property_instance->getName(),
-        }
-    );
     if ( !$self->_check_url($url) ) {
         ## no critic qw(RequireExplicitInclusion)
         WookieConnectorException->throw(
@@ -137,12 +128,18 @@ sub getProperty {
         );
         ## use critic
     }
-    my $response = $self->_ua->get( $url . $request );
+    my $response = $self->_do_request( $url, {
+        'api_key'       => $self->getConnection()->getApiKey(),
+        'shareddatakey' => $self->getConnection()->getSharedDataKey(),
+        'userid'        => $self->getUser()->getLoginName(),
+        'widgetid'      => $widget_instance->getIdentifier(),
+        'propertyname'  => $property_instance->getName(),
+    }, $GET );
     if ( !$response->is_success ) {
         ## no critic qw(RequireExplicitInclusion)
         WookieConnectorException->throw(
             error => sprintf $ERR{HTTP},
-            $response->header()->as_string, $response->content
+            $response->headers->as_string, $response->content
         );
         ## use critic
     }
@@ -290,17 +287,21 @@ has '_locale' => (
 );
 
 has '_user' => (
-    is      => 'rw',
-    isa     => 'WWW::Wookie::User',
-    reader  => 'getUser',
-    writer  => 'setUser',
-    default => sub { WWW::Wookie::User->new() },
+    is     => 'ro',
+    isa    => 'WWW::Wookie::User',
+    reader => 'getUser',
 );
+
+sub setUser {
+    my ($self, $login, $screen) = @_;
+    $self->_user = WWW::Wookie::User->new($login, $screen);
+    return;
+}
 
 has properties => (
     metaclass => 'Collection::Hash',
     is        => 'rw',
-    isa       => 'HashRef[WWW::Wookie::User]',
+    isa       => 'HashRef[WWW::Wookie::Widget::Property]',
     default   => sub { {} },
     provides  => {
         'set'    => 'addProperty',
@@ -343,7 +344,7 @@ sub getAvailableWidgets {
         $widgets{$id} =
           WWW::Wookie::Widget->new( $id, $title, $description, $icon );
     }
-    return %widgets;
+    return values %widgets;
 }
 
 sub setProperty {
@@ -525,11 +526,11 @@ __END__
 =head1 NAME
 
 WWW::Wookie::Connector::Service - Wookie connector service, handles all the
-data requests and responses.
+data requests and responses
 
 =head1 VERSION
 
-This document describes WWW::Wookie::Connector::Service version 0.0.1
+This document describes WWW::Wookie::Connector::Service version 0.0.2
 
 =head1 SYNOPSIS
 
@@ -545,15 +546,15 @@ Create a new connector
 
 =over
 
-=item URL to Wookie host as string
+=item 1. URL to Wookie host as string
 
-=item Wookie API key as string
+=item 2. Wookie API key as string
 
-=item Shared data key to use as string
+=item 3. Shared data key to use as string
 
-=item User login name
+=item 4. User login name
 
-=item User display name
+=item 5. User display name
 
 =back
 
@@ -612,9 +613,9 @@ L<HTTP::Request::Common|HTTP::Request::Common>
 L<HTTP::Status|HTTP::Status>
 L<LWP::UserAgent|LWP::UserAgent>
 L<Log::Log4perl|Log::Log4perl>
+L<Moose|Moose>
+L<Moose::Util::TypeConstraints|Moose::Util::TypeConstraints>
 L<MooseX::AttributeHelpers|MooseX::AttributeHelpers>
-L<Moose|Moose>
-L<Moose|Moose>
 L<Readonly|Readonly>
 L<Regexp::Common|Regexp::Common>
 L<WWW::Wookie::Connector::Exceptions|WWW::Wookie::Connector::Exceptions>
@@ -632,6 +633,9 @@ L<namespace::autoclean|namespace::autoclean>
 =head1 DIAGNOSTICS
 
 =head1 BUGS AND LIMITATIONS
+
+Please report any bugs or feature requests at L<RT for
+rt.cpan.org|https://rt.cpan.org/Dist/Display.html?Queue=WWW-Wookie>.
 
 =head1 AUTHOR
 

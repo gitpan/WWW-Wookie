@@ -16,6 +16,7 @@ lib/WWW/Wookie/Widget/Property.pm
 lib/WWW/Wookie/Widget.pm
 scripts/TestWookieService.pl
 t/00_base.t
+t/00_dependencies.t
 t/00_signature.t
 t/09_pod.t
 t/10_pod-coverage.t

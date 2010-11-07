@@ -3,16 +3,16 @@ use strict;
 use warnings;
 
 ## no critic qw(ProhibitLongLines)
-# $Id: Wookie.pm 347 2010-11-05 15:06:12Z roland $
-# $Revision: 347 $
+# $Id: Wookie.pm 354 2010-11-06 16:24:17Z roland $
+# $Revision: 354 $
 # $HeadURL: svn+ssh://ipenburg.xs4all.nl/srv/svnroot/barclay/trunk/lib/WWW/Wookie.pm $
-# $Date: 2010-11-05 16:06:12 +0100 (Fri, 05 Nov 2010) $
+# $Date: 2010-11-06 17:24:17 +0100 (Sat, 06 Nov 2010) $
 ## use critic
 
 use utf8;
 use 5.006000;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 1;
 
@@ -28,7 +28,7 @@ WWW::Wookie - Apache Wookie Connector Framework implementation
 
 =head1 VERSION
 
-This document describes WWW::Wookie version 0.0.1
+This document describes WWW::Wookie version 0.0.2
 
 =head1 SYNOPSIS
 
@@ -43,10 +43,8 @@ This document describes WWW::Wookie version 0.0.1
 
 This is a Perl implementation of the Wookie Connector Framework. For more
 information see:
-L<http://incubator.apache.org/wookie/
-embedding-wookie-widgets-in-other-applications.html
-|http://incubator.apache.org/wookie/
-embedding-wookie-widgets-in-other-applications.html>
+L<http://incubator.apache.org/wookie/embedding-wookie-widgets-in-other-applications.html|
+http://incubator.apache.org/wookie/embedding-wookie-widgets-in-other-applications.html>
 
 =head1 SUBROUTINES/METHODS
 
@@ -61,7 +59,7 @@ L<HTTP::Request::Common|HTTP::Request::Common>
 L<HTTP::Response|HTTP::Response>
 L<HTTP::Status|HTTP::Status>
 L<LWP::UserAgent|LWP::UserAgent>
-L<Log::Log4Perl|Log::Log4Perl>
+L<Log::Log4perl|Log::Log4perl>
 L<MooseX::AttributeHelpers|MooseX::AttributeHelpers>
 L<Moose|Moose>
 L<Readonly|Readonly>
@@ -70,6 +68,7 @@ L<Test::More|Test::More>
 L<Test::More|Test::More>
 L<Test::NoWarnings|Test::NoWarnings>
 L<XML::Simple|XML::Simple>
+L<namespace::autoclean|namespace::autoclean>
 
 =head1 INCOMPATIBILITIES
 
@@ -78,15 +77,19 @@ a port of the reference Java version of the Wookie Connector Framework.
 
 =head1 DIAGNOSTICS
 
-This module uses Log::Log4perl for logging.
+This module uses L<Log::Log4perl|Log::Log4perl> for logging.
 
 =head1 BUGS AND LIMITATIONS
 
 Testing is only done manually and interactively using the
-L<scripts/TestWookieService.pl|scripts/TestWookieService.pl> script that has
-to connect to a live Wookie server. Issues can be caused by this Connector
-Framework, the test script, the Wookie server or the widgets served by the
-Wookie server, which could all be considered works in progress.
+L<scripts/TestWookieService.pl|
+http://search.cpan.org/~ipenburg/WWW-Wookie-0.02/scripts/TestWookieService.pl>
+script that has to connect to a live Wookie server. Issues can be caused by
+this Connector Framework, the test script, the Wookie server or the widgets
+served by the Wookie server, which could all be considered works in progress.
+
+Please report any bugs or feature requests at L<RT for
+rt.cpan.org|https://rt.cpan.org/Dist/Display.html?Queue=WWW-Wookie>.
 
 =head1 AUTHOR
 

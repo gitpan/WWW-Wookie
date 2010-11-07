@@ -2,15 +2,15 @@ package WWW::Wookie::User;    # -*- cperl; cperl-indent-level: 4 -*-
 use strict;
 use warnings;
 
-# $Id: User.pm 350 2010-11-05 22:04:49Z roland $
-# $Revision: 350 $
+# $Id: User.pm 357 2010-11-07 10:53:18Z roland $
+# $Revision: 357 $
 # $HeadURL: svn+ssh://ipenburg.xs4all.nl/srv/svnroot/barclay/trunk/lib/WWW/Wookie/User.pm $
-# $Date: 2010-11-05 23:04:49 +0100 (Fri, 05 Nov 2010) $
+# $Date: 2010-11-07 11:53:18 +0100 (Sun, 07 Nov 2010) $
 
 use utf8;
 use 5.006000;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use Moose qw/around has/;
 use Moose::Util::TypeConstraints qw/as coerce from where subtype via/;
@@ -85,16 +85,16 @@ __END__
 
 =head1 NAME
 
-WWW::Wookie::User - represent a possible user of a widget.
+WWW::Wookie::User - represent a possible user of a widget
 
 =head1 VERSION
 
-This document describes WWW::Wookie::User version 0.0.1
+This document describes WWW::Wookie::User version 0.0.2
 
 =head1 SYNOPSIS
 
     use WWW::Wookie::User;
-	$u = WWW::Wookie::User->new($login, $nick);
+    $u = WWW::Wookie::User->new($login, $nick);
 
 =head1 DESCRIPTION
 
@@ -109,9 +109,11 @@ Create a new user.
 
 =over
 
-=item user login name as string
-=item user display name as string
-=item optional thumbnail URL as string
+=item 1. User login name as string
+
+=item 2. User display name as string
+
+=item 3. Optional thumbnail URL as string
 
 =back
 
@@ -132,7 +134,7 @@ to register on the system, it is guaranteed to be unique.
 
 =over
 
-=item new login name as string
+=item 1. New login name as string
 
 =back
 
@@ -143,7 +145,7 @@ on screen. In many cases it will be the same as the login name.
 
 =over
 
-=item new screen name as string
+=item 1. New screen name as string
 
 =back
 
@@ -158,7 +160,7 @@ Set the URL for a thumbnail representing this user.
 
 =over
 
-=item new thumbnail URL as string
+=item 1. New thumbnail URL as string
 
 =back
 
@@ -175,6 +177,9 @@ L<Readonly|Readonly>
 =head1 DIAGNOSTICS
 
 =head1 BUGS AND LIMITATIONS
+
+Please report any bugs or feature requests at L<RT for
+rt.cpan.org|https://rt.cpan.org/Dist/Display.html?Queue=WWW-Wookie>.
 
 =head1 AUTHOR
 

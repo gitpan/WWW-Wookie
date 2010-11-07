@@ -2,15 +2,15 @@ package WWW::Wookie::Widget::Property;    # -*- cperl; cperl-indent-level: 4 -*-
 use strict;
 use warnings;
 
-# $Id: Property.pm 350 2010-11-05 22:04:49Z roland $
-# $Revision: 350 $
+# $Id: Property.pm 357 2010-11-07 10:53:18Z roland $
+# $Revision: 357 $
 # $HeadURL: svn+ssh://ipenburg.xs4all.nl/srv/svnroot/barclay/trunk/lib/WWW/Wookie/Widget/Property.pm $
-# $Date: 2010-11-05 23:04:49 +0100 (Fri, 05 Nov 2010) $
+# $Date: 2010-11-07 11:53:18 +0100 (Sun, 07 Nov 2010) $
 
 use utf8;
 use 5.006000;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use Moose qw/around has/;
 
@@ -76,16 +76,16 @@ __END__
 
 =head1 NAME
 
-WWW::Wookie::Widget::Property - Property class.
+WWW::Wookie::Widget::Property - Property class
 
 =head1 VERSION
 
-This document describes WWW::Wookie::Widget::Property version 0.0.1
+This document describes WWW::Wookie::Widget::Property version 0.0.2
 
 =head1 SYNOPSIS
 
     use WWW::Wookie::Widget::Property;
-	$p = WWW::Wookie::Widget::Property->new($name, $value, 0);
+    $p = WWW::Wookie::Widget::Property->new($name, $value, 0);
 
 =head1 DESCRIPTION
 
@@ -97,11 +97,11 @@ Construct a new property.
 
 =over
 
-=item property name as string
+=item 1. Property name as string
 
-=item property value as string
+=item 2. Property value as string
 
-=item is property public (handled as shared data key) or private as boolean
+=item 3. Is property public (handled as shared data key) or private as boolean
 
 =back
 
@@ -124,7 +124,7 @@ Set property value.
 
 =over
 
-=item new value as string
+=item 1. New value as string
 
 =back
 
@@ -134,7 +134,7 @@ Set property name.
 
 =over
 
-=item new name as string
+=item 1. New name as string
 
 =back
 
@@ -144,7 +144,7 @@ Set C<isPublic> flag, 1 or 0.
 
 =over
 
-=item flag 1 or 0
+=item 1. Flag 1 or 0
 
 =back
 
@@ -160,6 +160,9 @@ L<Readonly|Readonly>
 =head1 DIAGNOSTICS
 
 =head1 BUGS AND LIMITATIONS
+
+Please report any bugs or feature requests at L<RT for
+rt.cpan.org|https://rt.cpan.org/Dist/Display.html?Queue=WWW-Wookie>.
 
 =head1 AUTHOR
 

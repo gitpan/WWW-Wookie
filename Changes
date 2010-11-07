@@ -1,4 +1,12 @@
 Revision history for Perl extension WWW::Wookie.
 
+0.02  Sun Nov   7 12:05:02 2010
+    - added build requirements
+    - WWW::Wookie::Connector::Service method getAvailableWidgets returns an
+      array of widgets instead of a hash reference containing widgets
+    - fixed broken links in POD (RT#62774)
+    - added namespace::autoclean as dependency (RT#62763)
+    - added test for dependencies
+
 0.01  Sat Nov   6 02:05:02 2010
-	- original version
+    - original version

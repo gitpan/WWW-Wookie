@@ -4,16 +4,16 @@ use strict;
 use warnings;
 
 ## no critic qw(ProhibitLongLines)
-# $Id: Interface.pm 347 2010-11-05 15:06:12Z roland $
-# $Revision: 347 $
+# $Id: Interface.pm 357 2010-11-07 10:53:18Z roland $
+# $Revision: 357 $
 # $HeadURL: svn+ssh://ipenburg.xs4all.nl/srv/svnroot/barclay/trunk/lib/WWW/Wookie/Connector/Service/Interface.pm $
-# $Date: 2010-11-05 16:06:12 +0100 (Fri, 05 Nov 2010) $
+# $Date: 2010-11-07 11:53:18 +0100 (Sun, 07 Nov 2010) $
 ## use critic
 
 use utf8;
 use 5.006000;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use Moose::Role qw/requires/;
 requires 'getAvailableWidgets';
@@ -36,20 +36,21 @@ __END__
 
 =encoding utf8
 
-=for stopwords Roland van Ipenburg Wookie guid
+=for stopwords Roland van Ipenburg Wookie guid PHP
 
 =head1 NAME
 
 WWW::Wookie::Connector::Service::Interface - Interface for
-L<Wookie::Connector::Service|Wookie::Connector::Service>.
+L<Wookie::Connector::Service|Wookie::Connector::Service>
 
 =head1 VERSION
 
 This document describes WWW::Wookie::Connector::Service::Interface version
-0.0.1
+0.0.2
 
 =head1 SYNOPSIS
 
+    use Moose;
     with 'WWW::Wookie::Connector::Service::Interface';
 
 =head1 DESCRIPTION
@@ -63,24 +64,24 @@ L<WWW::Wookie::Widget|WWW::Wookie::Widget> objects, otherwise false.
 
 =head2 C<getConnection>
 
-Get the current connection. Returns an
+Get the current connection. Returns a
 L<WWW::Wookie::Server::Connection|WWW::Wookie::Server::Connection> object.
 
 =head2 C<setUser>
 
-Set new user.
+Set the new user.
 
 =over
 
-=item User name for Wookie connection
+=item 1. User name for the Wookie connection 
 
-=item Screen name for Wookie connection
+=item 2. Screen name for the Wookie connection
 
 =back
 
 =head2 C<getUser>
 
-Get current user. Returns instance of user as a
+Get the current user. Returns an instance of the user as a
 L<WWW::Wookie::User|WWW::Wookie::User> object.
 
 =head2 C<getOrCreateInstance>
@@ -91,7 +92,7 @@ successful, otherwise false.
 
 =over
 
-=item widget as guid string or L<WWW::Wookie::Widget|WWW::Wookie::Widget>
+=item 1. Widget as guid string or a L<WWW::Wookie::Widget|WWW::Wookie::Widget>
 object
 
 =back
@@ -102,34 +103,34 @@ Add a new participant. Returns true if successful, otherwise false.
 
 =over
 
-=item instance of widget as
+=item 1. Instance of widget as
 L<WWW::Wookie::Widget::Instance|WWW::Wookie::Widget::Instance> object
 
-=item instance of user as L<WWW::Wookie::User|WWW::Wookie::User> object
+=item 2. Instance of user as L<WWW::Wookie::User|WWW::Wookie::User> object
 
 =back
 
 =head2 C<deleteParticipant>
 
-Delete participant. Return true if successful, otherwise false.
+Delete a participant. Returns true if successful, otherwise false.
 
 =over
 
-=item instance of widget as
+=item 1. Instance of widget as
 L<WWW::Wookie::Widget::Instance|WWW::Wookie::Widget::Instance> object
 
-=item instance of user as L<WWW::Wookie::User|WWW::Wookie::User> object
+=item 2. Instance of user as L<WWW::Wookie::User|WWW::Wookie::User> object
 
 =back
 
 =head2 C<getUsers>
 
-Get all participants of current widget. Returns an array of
+Get all participants of the current widget. Returns an array of
 L<WWW::Wookie::User|WWW::Wookie::User> instances.
 
 =over
 
-=item instance of widget as
+=item 1. Instance of widget as
 L<WWW::Wookie::Widget::Instance|WWW::Wookie::Widget::Instance> object
 
 =back
@@ -142,57 +143,57 @@ otherwise false.
 
 =over
 
-=item instance of widget as
+=item 1. Instance of widget as
 L<WWW::Wookie::Widget::Instance|WWW::Wookie::Widget::Instance> object
 
-=item instance of property as
+=item 2. Instance of property as
 L<WWW::Wookie::Widget::Property|WWW::Wookie::Widget::Property> object
 
 =back
 
 =head2 C<getProperty>
 
-Get property. Returns the property as
+Get a property. Returns the property as
 L<WWW::Wookie::Widget::Property|WWW::Wookie::Widget::Property> if successful,
 otherwise false.
 
 =over
 
-=item instance of widget as
+=item 1. Instance of widget as
 L<WWW::Wookie::Widget::Instance|WWW::Wookie::Widget::Instance> object
 
-=item instance of property as
+=item 2. Instance of property as
 L<WWW::Wookie::Widget::Property|WWW::Wookie::Widget::Property> object
 
 =back
 
 =head2 C<deleteProperty>
 
-Delete property. Returns true if successful, otherwise false.
+Delete a property. Returns true if successful, otherwise false.
 
 =over
 
-=item instance of widget as
+=item 1. Instance of widget as
 L<WWW::Wookie::Widget::Instance|WWW::Wookie::Widget::Instance> object
 
-=item instance of property as
+=item 2. Instance of property as
 L<WWW::Wookie::Widget::Property|WWW::Wookie::Widget::Property> object
 
 =back
 
 =head2 C<setLocale>
 
-Set locale.
+Set a locale.
 
 =over
 
-=item locale as string
+=item 1. Locale as string
 
 =back
 
 =head2 C<getLocale>
 
-Get current locale setting. Returns current locale as string.
+Get the current locale setting. Returns current locale as string.
 
 =head1 CONFIGURATION AND ENVIRONMENT
 
@@ -205,6 +206,9 @@ L<Moose::Role|Moose::Role>
 =head1 DIAGNOSTICS
 
 =head1 BUGS AND LIMITATIONS
+
+Please report any bugs or feature requests at L<RT for
+rt.cpan.org|https://rt.cpan.org/Dist/Display.html?Queue=WWW-Wookie>.
 
 =head1 AUTHOR
 

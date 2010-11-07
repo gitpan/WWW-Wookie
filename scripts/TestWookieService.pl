@@ -2,15 +2,15 @@
 use strict;
 use warnings;
 
-# $Id: TestWookieService.pl 347 2010-11-05 15:06:12Z roland $
-# $Revision: 347 $
+# $Id: TestWookieService.pl 355 2010-11-06 23:22:51Z roland $
+# $Revision: 355 $
 # $HeadURL: svn+ssh://ipenburg.xs4all.nl/srv/svnroot/barclay/trunk/scripts/TestWookieService.pl $
-# $Date: 2010-11-05 16:06:12 +0100 (Fri, 05 Nov 2010) $
+# $Date: 2010-11-07 00:22:51 +0100 (Sun, 07 Nov 2010) $
 
 use utf8;
 use 5.006000;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use CGI qw/:all/;
 use Data::Dumper qw/Dumper/;
@@ -84,7 +84,7 @@ sub main {
         $SHARED_DATA_KEY, $USER );
     $test->setLocale($LOCALE);
     $test->getUser()->setLoginName($USER);
-    my %available_widgets = $test->getAvailableWidgets();
+    my @available_widgets = $test->getAvailableWidgets();
 
     $res->add_content( $q->start_html($WOOKIE_TITLE) );
 
@@ -97,7 +97,7 @@ sub main {
 
     for my $id (@IDS) {
         my %labels = ( $EMPTY => $NO_WIDGET );
-        foreach my $widget ( values %available_widgets ) {
+        foreach my $widget ( @available_widgets ) {
             $labels{ $widget->getIdentifier() } = $widget->getTitle();
         }
         $res->add_content(
@@ -198,7 +198,7 @@ Framework Perl implementation
 
 =head1 VERSION
 
-This document describes C<TestWookieService.pl> version 0.0.1
+This document describes C<TestWookieService.pl> version 0.0.2
 
 =head1 USAGE
 
@@ -228,19 +228,26 @@ C<localhost>, default port 8081
 
 =head1 DEPENDENCIES
 
+L<CGI|CGI>
+L<Data::Dumper|Data::Dumper>
+L<Getopt::Long|Getopt::Long>
+L<HTTP::Server::Brick|HTTP::Server::Brick>
+L<Pod::Usage|Pod::Usage>
+L<Readonly|Readonly>
+L<WWW::Wookie::Connector::Service|WWW::Wookie::Connector::Service>
+L<WWW::Wookie::User|WWW::Wookie::User>
+L<WWW::Wookie::Widget::Property|WWW::Wookie::Widget::Property>
+
 =head1 INCOMPATIBILITIES
 
 =head1 BUGS AND LIMITATIONS
 
 =head1 DESCRIPTION
 
-This starts an HTTP service which presents an HTML page that interacts with a
+This starts an HTTP service which presents an HTML page that interacts with an
 Apache Wookie Server using a Perl implementation of the Apache Wookie
 Connector Framework.  For more information see:
-L<http://incubator.apache.org/wookie/
-embedding-wookie-widgets-in-other-applications.html
-|http://incubator.apache.org/wookie/
-embedding-wookie-widgets-in-other-applications.html>
+L<http://incubator.apache.org/wookie/embedding-wookie-widgets-in-other-applications.html|http://incubator.apache.org/wookie/embedding-wookie-widgets-in-other-applications.html>
 
 =head1 CONFIGURATION AND ENVIRONMENT
 
@@ -253,20 +260,20 @@ Roland van Ipenburg  C<< <ipenburg@xs4all.nl> >>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2010 Roland van Ipenburg
+    Copyright 2010 Roland van Ipenburg
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+        http://www.apache.org/licenses/LICENSE-2.0
 
 =head1 DISCLAIMER OF WARRANTY
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 
 =cut

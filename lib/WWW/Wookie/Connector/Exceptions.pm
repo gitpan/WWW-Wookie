@@ -4,16 +4,16 @@ use strict;
 use warnings;
 
 ## no critic qw(ProhibitLongLines)
-# $Id: Exceptions.pm 347 2010-11-05 15:06:12Z roland $
-# $Revision: 347 $
+# $Id: Exceptions.pm 357 2010-11-07 10:53:18Z roland $
+# $Revision: 357 $
 # $HeadURL: svn+ssh://ipenburg.xs4all.nl/srv/svnroot/barclay/trunk/lib/WWW/Wookie/Connector/Exceptions.pm $
-# $Date: 2010-11-05 16:06:12 +0100 (Fri, 05 Nov 2010) $
+# $Date: 2010-11-07 11:53:18 +0100 (Sun, 07 Nov 2010) $
 ## use critic
 
 use utf8;
 use 5.006000;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use Exception::Class qw(
     WookieConnectorException
@@ -30,11 +30,11 @@ __END__
 
 =head1 NAME
 
-WWW::Wookie::Connector::Exceptions - Handles exception information.
+WWW::Wookie::Connector::Exceptions - Handles exception information
 
 =head1 VERSION
 
-This document describes WWW::Wookie::Connector::Exceptions version 0.0.1
+This document describes WWW::Wookie::Connector::Exceptions version 0.0.2
 
 =head1 SYNOPSIS
 
@@ -55,6 +55,9 @@ This document describes WWW::Wookie::Connector::Exceptions version 0.0.1
 =head1 DIAGNOSTICS
 
 =head1 BUGS AND LIMITATIONS
+
+Please report any bugs or feature requests at L<RT for
+rt.cpan.org|https://rt.cpan.org/Dist/Display.html?Queue=WWW-Wookie>.
 
 =head1 AUTHOR
 

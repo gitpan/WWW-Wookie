@@ -2,15 +2,15 @@ package WWW::Wookie::Server::Connection;  # -*- cperl; cperl-indent-level: 4 -*-
 use strict;
 use warnings;
 
-# $Id: Connection.pm 351 2010-11-05 23:02:40Z roland $
-# $Revision: 351 $
+# $Id: Connection.pm 357 2010-11-07 10:53:18Z roland $
+# $Revision: 357 $
 # $HeadURL: svn+ssh://ipenburg.xs4all.nl/srv/svnroot/barclay/trunk/lib/WWW/Wookie/Server/Connection.pm $
-# $Date: 2010-11-06 00:02:40 +0100 (Sat, 06 Nov 2010) $
+# $Date: 2010-11-07 11:53:18 +0100 (Sun, 07 Nov 2010) $
 
 use utf8;
 use 5.006000;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use Data::Dumper;
 use Moose qw/around has/;
@@ -102,11 +102,11 @@ __END__
 
 =head1 NAME
 
-WWW::Wookie::Server::Connection - A connection to a Wookie server.
+WWW::Wookie::Server::Connection - A connection to a Wookie server
 
 =head1 VERSION
 
-This document describes WWW::Wookie::Server::Connection version 0.0.1
+This document describes WWW::Wookie::Server::Connection version 0.0.2
 
 =head1 SYNOPSIS
 
@@ -123,22 +123,22 @@ via the Wookie REST API.
 
 =head2 C<new>
 
-Create a connection to a Wookie server at a giver URL.
+Create a connection to a Wookie server at a given URL.
 
 =over 4
 
-=item The URL of the Wookie server as string
+=item 1. The URL of the Wookie server as string
 
-=item The API key for the server as string
+=item 2. The API key for the server as string
 
-=item The shared data key for the server connection as string
+=item 3. The shared data key for the server connection as string
 
 =back
 
 =head2 C<getURL>
 
-Get the URL of the Wookie server. Returns the current Wookie connection URL as
-string.
+Get the URL of the Wookie server. Returns the current Wookie connection's URL
+as string.
 
 =head2 C<setURL>
 
@@ -146,8 +146,8 @@ Set the URL of the Wookie server.
 
 =head2 C<getApiKey>
 
-Get the API key for this server. Returns the current Wookie connection API key
-as string. Throws a C<WookieConnectorException>.
+Get the API key for this server. Returns the current Wookie connection's API
+key as string. Throws a C<WookieConnectorException>.
 
 =head2 C<setApiKey>
 
@@ -155,8 +155,8 @@ Set the API key for this server.
 
 =head2 C<getSharedDataKey>
 
-Get the shared data key for this server. Returns the current Wookie connection
-shared data key. Throws a C<WookieConnectorException>.
+Get the shared data key for this server. Returns the current Wookie
+connection's shared data key. Throws a C<WookieConnectorException>.
 
 =head2 C<setSharedDataKey>
 
@@ -166,7 +166,9 @@ Set the shared data key for this server.
 
 Output connection information as string.
 
-=head2 C<test> Test Wookie server connection
+=head2 C<test>
+
+Test the Wookie server connection.
 
 =head1 CONFIGURATION AND ENVIRONMENT
 
@@ -184,6 +186,9 @@ L<XML::Simple|XML::Simple>
 =head1 DIAGNOSTICS
 
 =head1 BUGS AND LIMITATIONS
+
+Please report any bugs or feature requests at L<RT for
+rt.cpan.org|https://rt.cpan.org/Dist/Display.html?Queue=WWW-Wookie>.
 
 =head1 AUTHOR
 

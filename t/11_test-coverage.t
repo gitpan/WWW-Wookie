@@ -1,7 +1,7 @@
-# $Id: 11_test-coverage.t 350 2010-11-05 22:04:49Z roland $
-# $Revision: 350 $
+# $Id: 11_test-coverage.t 356 2010-11-07 00:26:50Z roland $
+# $Revision: 356 $
 # $HeadURL: svn+ssh://ipenburg.xs4all.nl/srv/svnroot/barclay/trunk/t/11_test-coverage.t $
-# $Date: 2010-11-05 23:04:49 +0100 (Fri, 05 Nov 2010) $
+# $Date: 2010-11-07 01:26:50 +0100 (Sun, 07 Nov 2010) $
 
 use Test::More;
 eval "use Test::TestCoverage 0.08";
@@ -9,12 +9,11 @@ plan skip_all => "Test::TestCoverage 0.08 required for testing test coverage"
   if $@;
 
 plan tests => 7;
-my $TEST   = q{test};
-my $URL    = q{http://localhost:8080/wookie/};
-my $WIDGET = $URL . q{wservices/notsupported};
-my $GUID   = q{http://notsupported};
-my $TITLE  = q{Unsupported widget widget};
-my $LOCALE = q{en_US};
+my $TEST            = q{TEST};
+my $API_KEY         = $TEST;
+my $SHARED_DATA_KEY = q{localhost_dev};
+my $SERVER          = $ENV{WOOKIE_SERVER} || q{http://localhost:8080/wookie/};
+my $LOCALE          = q{en_US};
 
 my $obj;
 
@@ -77,7 +76,7 @@ $obj->meta();
 ok_test_coverage('WWW::Wookie::User');
 
 test_coverage("WWW::Wookie::Server::Connection");
-$obj = WWW::Wookie::Server::Connection->new( $URL, $TEST, $TEST );
+$obj = WWW::Wookie::Server::Connection->new( $SERVER, $TEST, $TEST );
 $obj->getURL();
 $obj->getApiKey();
 $obj->getSharedDataKey();
@@ -88,44 +87,37 @@ $obj->meta();
 ok_test_coverage('WWW::Wookie::Server::Connection');
 
 TODO: {
-    local $TODO = q{Need a live Wookie server for this test} if !$up;
+    todo_skip
+q{Need a live Wookie server for this test. Set the enviroment variable WOOKIE_SERVER if the server isn't in the default location.},
+      1
+      if !$up;
     test_coverage("WWW::Wookie::Connector::Service");
 
- #$obj = WWW::Wookie::Connector::Service->new($URL, $TEST, $TEST, $TEST, $TEST);
- #$obj->getLogger();
- #$obj->getConnection();
- #$obj->getLocale();
- #$obj->setLocale($LOCALE);
- #$obj->getUsers(
- #	WWW::Wookie::Widget::Instance->new($WIDGET, $GUID, $TITLE, 1, 1),
- #);
- #$obj->getUser();
- #$obj->setUser($TEST, $TEST);
- #$obj->properties();
- #$obj->WidgetInstances();
- #$obj->getProperty(
- #	WWW::Wookie::Widget::Instance->new($WIDGET, $GUID, $TITLE, 1, 1),
- #	WWW::Wookie::Widget::Property->new($TEST, $TEST, 0),
- #);
- #$obj->getOrCreateInstance($GUID);
- #$obj->deleteProperty(
- #	WWW::Wookie::Widget::Instance->new($TEST, $TEST, $TEST, 1, 1),
- #	WWW::Wookie::Widget::Property->new($TEST, $TEST, 0),
- #);
- #$obj->getAvailableWidgets();
- #$obj->setProperty(
- #	WWW::Wookie::Widget::Instance->new($TEST, $TEST, $TEST, 1, 1),
- #	WWW::Wookie::Widget::Property->new($TEST, $TEST, 0),
- #);
- #$obj->addParticipant(
- #	WWW::Wookie::Widget::Instance->new($TEST, $TEST, $TEST, 1, 1),
- #	WWW::Wookie::User->new($TEST, $TEST, $TEST),
- #);
- #$obj->deleteParticipant(
- #	WWW::Wookie::Widget::Instance->new($TEST, $TEST, $TEST, 1, 1),
- #	WWW::Wookie::User->new($TEST, $TEST, $TEST),
- #);
- #$obj->DESTROY();
- #$obj->meta();
+    $obj =
+      WWW::Wookie::Connector::Service->new( $SERVER, $API_KEY, $SHARED_DATA_KEY,
+        $TEST, $TEST );
+    $obj->getLogger();
+    $obj->getConnection();
+    $obj->setLocale($LOCALE);
+    $obj->getLocale();
+    my @widgets = $obj->getAvailableWidgets();
+    my $user    = $obj->getUser();
+    foreach my $widget (@widgets) {
+        diag( $widget->getIdentifier );
+        my $instance = $obj->getOrCreateInstance($widget);
+        $obj->getUsers($instance);
+        $obj->setUser( $TEST, $TEST );
+        $obj->properties();
+        my $property = WWW::Wookie::Widget::Property->new( $TEST, $TEST, 0 );
+        $obj->WidgetInstances();
+        $obj->getProperty( $instance, $property );
+        $obj->addProperty( $instance, $property );
+        $obj->setProperty( $instance, $property );
+        $obj->deleteProperty( $instance, $property );
+        $obj->addParticipant( $instance, $user );
+        $obj->deleteParticipant( $instance, $user );
+    }
+    $obj->DESTROY();
+    $obj->meta();
     ok_test_coverage('WWW::Wookie::Connector::Service');
 }

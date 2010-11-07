@@ -2,15 +2,15 @@ package WWW::Wookie::Widget;    # -*- cperl; cperl-indent-level: 4 -*-
 use strict;
 use warnings;
 
-# $Id: Widget.pm 350 2010-11-05 22:04:49Z roland $
-# $Revision: 350 $
+# $Id: Widget.pm 357 2010-11-07 10:53:18Z roland $
+# $Revision: 357 $
 # $HeadURL: svn+ssh://ipenburg.xs4all.nl/srv/svnroot/barclay/trunk/lib/WWW/Wookie/Widget.pm $
-# $Date: 2010-11-05 23:04:49 +0100 (Fri, 05 Nov 2010) $
+# $Date: 2010-11-07 11:53:18 +0100 (Sun, 07 Nov 2010) $
 
 use utf8;
 use 5.006000;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use Moose qw/around has/;
 
@@ -74,20 +74,20 @@ __END__
 
 =head1 NAME
 
-WWW::Wookie::Widget - A client side representation of a widget.
+WWW::Wookie::Widget - A client side representation of a widget
 
 =head1 VERSION
 
-This document describes WWW::Wookie::Widget version 0.0.1
+This document describes WWW::Wookie::Widget version 0.0.2
 
 =head1 SYNOPSIS
 
     use WWW::Wookie::Widget;
-	$w = WWW::Wookie::Widget->new($guid, $title, $description, $icon);
-	$w->getIdentifier;
-	$w->getTitle;
-	$w->getDescription;
-	$w->getIcon;
+    $w = WWW::Wookie::Widget->new($guid, $title, $description, $icon);
+    $w->getIdentifier;
+    $w->getTitle;
+    $w->getDescription;
+    $w->getIcon;
 
 =head1 DESCRIPTION
 
@@ -99,13 +99,13 @@ Initialize a new widget.
 
 =over
 
-=item widget identifier/guid as string
+=item 1. Widget identifier/guid as string
 
-=item widget title as string
+=item 2. Widget title as string
 
-=item widget description as string
+=item 3. Widget description as string
 
-=item widget icon url as string
+=item 4. Widget icon url as string
 
 =back
 
@@ -140,6 +140,9 @@ L<Readonly|Readonly>
 =head1 DIAGNOSTICS
 
 =head1 BUGS AND LIMITATIONS
+
+Please report any bugs or feature requests at L<RT for
+rt.cpan.org|https://rt.cpan.org/Dist/Display.html?Queue=WWW-Wookie>.
 
 =head1 AUTHOR
 
