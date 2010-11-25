@@ -2,15 +2,15 @@ package WWW::Wookie::Widget::Instance;    # -*- cperl; cperl-indent-level: 4 -*-
 use strict;
 use warnings;
 
-# $Id: Instance.pm 357 2010-11-07 10:53:18Z roland $
-# $Revision: 357 $
+# $Id: Instance.pm 360 2010-11-22 13:03:01Z roland $
+# $Revision: 360 $
 # $HeadURL: svn+ssh://ipenburg.xs4all.nl/srv/svnroot/barclay/trunk/lib/WWW/Wookie/Widget/Instance.pm $
-# $Date: 2010-11-07 11:53:18 +0100 (Sun, 07 Nov 2010) $
+# $Date: 2010-11-22 14:03:01 +0100 (Mon, 22 Nov 2010) $
 
 use utf8;
 use 5.006000;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use Moose qw/around has/;
 
@@ -91,7 +91,7 @@ WWW::Wookie::Widget::Instance - An instance of a widget for use on the client
 
 =head1 VERSION
 
-This document describes WWW::Wookie::Widget::Instance version 0.0.2
+This document describes WWW::Wookie::Widget::Instance version 0.03
 
 =head1 SYNOPSIS
 

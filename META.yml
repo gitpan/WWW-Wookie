@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               WWW-Wookie
-version:            0.02
+version:            0.03
 abstract:           Apache Wookie Connector Framework implementation
 author:
     - Roland van Ipenburg <ipenburg@xs4all.nl>
@@ -24,9 +24,11 @@ requires:
     Moose::Util::TypeConstraints:  0
     MooseX::AttributeHelpers:  0
     namespace::autoclean:  0
+    overload:             0
     Readonly:             0
     Regexp::Common:       0
     URI:                  0
+    URI::Escape:          0
     XML::Simple:          0
 no_index:
     directory:

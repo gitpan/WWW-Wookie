@@ -4,18 +4,19 @@ use strict;
 use warnings;
 
 ## no critic qw(ProhibitLongLines)
-# $Id: Interface.pm 357 2010-11-07 10:53:18Z roland $
-# $Revision: 357 $
+# $Id: Interface.pm 365 2010-11-25 01:15:48Z roland $
+# $Revision: 365 $
 # $HeadURL: svn+ssh://ipenburg.xs4all.nl/srv/svnroot/barclay/trunk/lib/WWW/Wookie/Connector/Service/Interface.pm $
-# $Date: 2010-11-07 11:53:18 +0100 (Sun, 07 Nov 2010) $
+# $Date: 2010-11-25 02:15:48 +0100 (Thu, 25 Nov 2010) $
 ## use critic
 
 use utf8;
 use 5.006000;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use Moose::Role qw/requires/;
+requires 'getAvailableServices';
 requires 'getAvailableWidgets';
 requires 'getConnection';
 requires 'setUser';
@@ -24,11 +25,13 @@ requires 'getOrCreateInstance';
 requires 'addParticipant';
 requires 'deleteParticipant';
 requires 'getUsers';
+requires 'addProperty';
 requires 'setProperty';
 requires 'getProperty';
 requires 'deleteProperty';
 requires 'setLocale';
 requires 'getLocale';
+requires 'getWidget';
 
 1;
 
@@ -46,49 +49,76 @@ L<Wookie::Connector::Service|Wookie::Connector::Service>
 =head1 VERSION
 
 This document describes WWW::Wookie::Connector::Service::Interface version
-0.0.2
+0.03
 
 =head1 SYNOPSIS
 
     use Moose;
+    use Moose::Role;
     with 'WWW::Wookie::Connector::Service::Interface';
 
 =head1 DESCRIPTION
 
 =head1 SUBROUTINES/METHODS
 
+=head2 C<getAvailableServices>
+
+Get a all available service categories in the server. Returns an array of
+L<WWWW::Wookie::Widget::Category|WW::Wookie::Widget::Category> objects.
+Throws a C<WookieConnectorException>.
+
 =head2 C<getAvailableWidgets>
 
-Get all available widgets. Returns an array of
-L<WWW::Wookie::Widget|WWW::Wookie::Widget> objects, otherwise false.
+Get all available widgets in the server, or only the available widgets in the
+specified service category. Returns an array of
+L<WWW::Wookie::Widget|WWW::Wookie::Widget> objects, otherwise false. Throws a
+C<WookieConnectorException>.
+
+=over
+
+=item 1. Service category name as string
+
+=back
+
+=head2 C<getWidget>
+
+Get the details of the widget specified by it's identifier. Returns a
+L<WWW::Wookie::Widget|WWW::Wookie::Widget> object.
+
+=over
+
+=item 1. The identifier of an available widget
+
+=back
 
 =head2 C<getConnection>
 
-Get the current connection. Returns a
+Get the currently active connection to the Wookie server. Returns a
 L<WWW::Wookie::Server::Connection|WWW::Wookie::Server::Connection> object.
 
 =head2 C<setUser>
 
-Set the new user.
+Set the current user.
 
 =over
 
-=item 1. User name for the Wookie connection 
+=item 1. User name for the current Wookie connection 
 
-=item 2. Screen name for the Wookie connection
+=item 2. Screen name for the current Wookie connection
 
 =back
 
 =head2 C<getUser>
 
-Get the current user. Returns an instance of the user as a
+Retrieve the details of the current user. Returns an instance of the user as a
 L<WWW::Wookie::User|WWW::Wookie::User> object.
 
 =head2 C<getOrCreateInstance>
 
-Get or create a new widget instance. Returns a
+Get or create a new instance of a widget. The current user will be added as a
+participant. Returns a
 L<WWW::Wookie::Widget::Instance|WWW::Wookie::Widget::Instance> object if
-successful, otherwise false.
+successful, otherwise false. Throws a C<WookieConnectorException>. 
 
 =over
 
@@ -99,7 +129,8 @@ object
 
 =head2 C<addParticipant>
 
-Add a new participant. Returns true if successful, otherwise false.
+Add a participant to a widget. Returns true if successful, otherwise false.
+Throws a C<WookieWidgetInstanceException> or a C<WookieConnectorException>.
 
 =over
 
@@ -112,7 +143,8 @@ L<WWW::Wookie::Widget::Instance|WWW::Wookie::Widget::Instance> object
 
 =head2 C<deleteParticipant>
 
-Delete a participant. Returns true if successful, otherwise false.
+Delete a participant. Returns true if successful, otherwise false. Throws a
+C<WookieWidgetInstanceException> or a C<WookieConnectorException>.
 
 =over
 
@@ -126,7 +158,8 @@ L<WWW::Wookie::Widget::Instance|WWW::Wookie::Widget::Instance> object
 =head2 C<getUsers>
 
 Get all participants of the current widget. Returns an array of
-L<WWW::Wookie::User|WWW::Wookie::User> instances.
+L<WWW::Wookie::User|WWW::Wookie::User> instances. Throws a
+C<WookieConnectorException>.
 
 =over
 
@@ -135,11 +168,27 @@ L<WWW::Wookie::Widget::Instance|WWW::Wookie::Widget::Instance> object
 
 =back
 
+=head2 C<addProperty>
+
+Adds a new property. Returns true if successful, otherwise false. Throws a
+C<WookieConnectorException>.
+
+=over
+
+=item 1. Instance of widget as
+L<WWW::Wookie::Widget::Instance|WWW::Wookie::Widget::Instance> object
+
+=item 2. Instance of property as
+L<WWW::Wookie::Widget::Property|WWW::Wookie::Widget::Property> object
+
+=back
+
 =head2 C<setProperty>
 
 Set a new property. Returns the property as
 L<WWW::Wookie::Widget::Property|WWW::Wookie::Widget::Property> if successful,
-otherwise false.
+otherwise false. Throws a C<WookieWidgetInstanceException> or a
+C<WookieConnectorException>.
 
 =over
 
@@ -155,7 +204,8 @@ L<WWW::Wookie::Widget::Property|WWW::Wookie::Widget::Property> object
 
 Get a property. Returns the property as
 L<WWW::Wookie::Widget::Property|WWW::Wookie::Widget::Property> if successful,
-otherwise false.
+otherwise false. Throws a C<WookieWidgetInstanceException> or a
+C<WookieConnectorException>.
 
 =over
 
@@ -169,7 +219,8 @@ L<WWW::Wookie::Widget::Property|WWW::Wookie::Widget::Property> object
 
 =head2 C<deleteProperty>
 
-Delete a property. Returns true if successful, otherwise false.
+Delete a property. Returns true if successful, otherwise false. Throws a
+C<WookieWidgetInstanceException> or a C<WookieConnectorException>.
 
 =over
 
@@ -216,7 +267,7 @@ Roland van Ipenburg  C<< <ipenburg@xs4all.nl> >>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2010 Roland van Ipenburg
+    Copyright 2010 Roland van Ipenburg
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

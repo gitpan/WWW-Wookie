@@ -14,38 +14,43 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 2f13c48d5bbd5a5fed2ddbbe87a6758570f2c36f Changes
+SHA1 c194b502a58a8d2838c6e24c5a9d57c4d85023c5 Changes
 SHA1 598f87f072f66e2269dd6919292b2934dbb20492 LICENSE
-SHA1 c425d525f10349a756568011a6ff4fa943626f8d MANIFEST
-SHA1 d640d0a183d4bb5a044a5133f5d84d70643abfa7 META.yml
-SHA1 c4f554433534e6371ccade876238474cebee24c9 Makefile.PL
-SHA1 ad7c845a7623a36fb7ca97b030fb2851af59035d README
-SHA1 2665a78519308ea51c7f41e72e466e7633c94ce1 lib/WWW/Wookie.pm
-SHA1 98a4d73243f5b67a8f07e0956c17a281e52dc256 lib/WWW/Wookie/Connector/Exceptions.pm
-SHA1 25c91bf939faaa9db245e5b9b6faa0273608b383 lib/WWW/Wookie/Connector/Service.pm
-SHA1 aeeef5ad053d36d1e4319eada41c55366f26db7d lib/WWW/Wookie/Connector/Service/Interface.pm
-SHA1 912dba82054db4b48f9d367fd11e82f5828555b4 lib/WWW/Wookie/Server/Connection.pm
-SHA1 ba5fad5f5b970625b3c07a07ffc9a1207bb5f27d lib/WWW/Wookie/User.pm
-SHA1 9c6fd2ac9f9ccfa0f4e272f7cac396a159a17230 lib/WWW/Wookie/Widget.pm
-SHA1 1a6489a3c92123d9ea61f23256b0efaa6f6c6672 lib/WWW/Wookie/Widget/Instance.pm
-SHA1 cebbd622ac1406393f36f729adff8d4b068e9dc4 lib/WWW/Wookie/Widget/Instances.pm
-SHA1 f6a41894965880630de8d8b740b04035a430d07b lib/WWW/Wookie/Widget/Property.pm
-SHA1 5dca9223018b78b8aaa9301b1bacf4d2daea560a scripts/TestWookieService.pl
-SHA1 cd376076f586f5b6d5a838317948899713db4462 t/00_base.t
+SHA1 b7b3acd2af04d3ae5d043bd26cac81f226703ca4 MANIFEST
+SHA1 db1974175f854e81f9ba5e1fc2c55539302e52e8 META.yml
+SHA1 ed9eac5605e44f6e57e5c1466e50836f4ba16866 Makefile.PL
+SHA1 9a9478f59e254d76b269652955d7916f68d2d99d README
+SHA1 4303ff44dc2b8c80502dfd07f0b91d8ec32a1729 lib/WWW/Wookie.pm
+SHA1 f1a36d617b3a16d0ca327bf304b447f821fdd3bb lib/WWW/Wookie/Connector/Exceptions.pm
+SHA1 ed3eb05276157ef5599f795aadec305145b01c92 lib/WWW/Wookie/Connector/Service.pm
+SHA1 aae93704f61109541c12b9facf35b44987084b3c lib/WWW/Wookie/Connector/Service/Interface.pm
+SHA1 5323b52c484152df44e9c40c41ea40824771e023 lib/WWW/Wookie/Server/Connection.pm
+SHA1 5c20b2026bb21ad462db51781257dc87742b34fa lib/WWW/Wookie/User.pm
+SHA1 db5e625e539a2cd736fdc7e97deef77ba881c4b5 lib/WWW/Wookie/Widget.pm
+SHA1 feb9564b114776744d5d5dd4d97f54defa365b7a lib/WWW/Wookie/Widget/Category.pm
+SHA1 9ceb5a3d1b439808d1c6b4ee37d451eec2a50b76 lib/WWW/Wookie/Widget/Instance.pm
+SHA1 d514b5e73aebf6589c143a9104ef83438ceb5da3 lib/WWW/Wookie/Widget/Instances.pm
+SHA1 21fe8c16ad2545cf5dc1f786cdd8547f0f2e7075 lib/WWW/Wookie/Widget/Property.pm
+SHA1 ebd04f6c8e6b5a153441bb7e22f7e5528b1d8bbb scripts/TestWookieService.pl
+SHA1 54be3d06430e69ddfb50da5e755fb1a735a7c393 t/00_base.t
 SHA1 758a03bba31e36b2ada3dd6c1c4e210b47d32b83 t/00_dependencies.t
 SHA1 2a3e8d692d5cf51de8fa004091522b84828b1f18 t/00_signature.t
+SHA1 e071aedb3d4275ebdaaea58f901341ebb1747ddc t/01_live.t
+SHA1 15470f4d61670f375b43ffe45249fccb253f8635 t/02_live_rest_api.t
+SHA1 b25e7ca8b61393382633500fe95be31a467a8cb5 t/03_exceptions.t
 SHA1 04e2d584c560ac14a3208a62d11c04a7379eae13 t/09_pod.t
 SHA1 61cc6e20e7f434f4fcbd9d8c83fc42ae0bbf34d6 t/10_pod-coverage.t
-SHA1 e0f8e217ef8f39ed8d96222fed21a8ce8bfcec80 t/11_test-coverage.t
+SHA1 82dfa50add149a51c885dc58b608056d86160376 t/11_test-coverage.t
 SHA1 b3da53267111d035570bb7e16aa5c150e1803e2f t/12_manifest.t
 SHA1 62990f375235177ebd094a2b30eb585598007dc2 t/13_critic.t
 SHA1 21e64e63cc17a9c0fadb7bce7c63b8439c118fd3 t/14_kwalitee.t
 SHA1 39a459e10ad185287c408db82e14678dedf52015 t/15_spell.t
 SHA1 35865a0caae03104bc29c21ae34769c557e30145 t/perlcriticrc
+SHA1 43de2045df091ffae82f5dffcf2131005168338a t/rt.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.9 (GNU/Linux)
 
-iEYEARECAAYFAkzWicQACgkQr7H9zeGP1tUqZACggm3fzQk2cnoehX6K+Q3FaJL1
-efAAn2cfaPz83GBU+0aU6Esuec7dS5oe
-=rTk2
+iEYEARECAAYFAkztugoACgkQr7H9zeGP1tVzAgCeMCvuWGh60icxYMygKWlt07IM
+KFEAn3WVkZdRn7toCmTkRipHR+pFf7yB
+=Jk6U
 -----END PGP SIGNATURE-----

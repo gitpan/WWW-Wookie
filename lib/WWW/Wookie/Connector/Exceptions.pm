@@ -4,20 +4,20 @@ use strict;
 use warnings;
 
 ## no critic qw(ProhibitLongLines)
-# $Id: Exceptions.pm 357 2010-11-07 10:53:18Z roland $
-# $Revision: 357 $
+# $Id: Exceptions.pm 361 2010-11-22 21:50:23Z roland $
+# $Revision: 361 $
 # $HeadURL: svn+ssh://ipenburg.xs4all.nl/srv/svnroot/barclay/trunk/lib/WWW/Wookie/Connector/Exceptions.pm $
-# $Date: 2010-11-07 11:53:18 +0100 (Sun, 07 Nov 2010) $
+# $Date: 2010-11-22 22:50:23 +0100 (Mon, 22 Nov 2010) $
 ## use critic
 
 use utf8;
 use 5.006000;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use Exception::Class qw(
-    WookieConnectorException
-    WookieWidgetInstanceException
+  WookieConnectorException
+  WookieWidgetInstanceException
 );
 
 1;
@@ -34,7 +34,7 @@ WWW::Wookie::Connector::Exceptions - Handles exception information
 
 =head1 VERSION
 
-This document describes WWW::Wookie::Connector::Exceptions version 0.0.2
+This document describes WWW::Wookie::Connector::Exceptions version 0.03
 
 =head1 SYNOPSIS
 
@@ -44,11 +44,18 @@ This document describes WWW::Wookie::Connector::Exceptions version 0.0.2
 
 =head1 DESCRIPTION
 
+Provides C<WookieConnectorException> and C<WookieWidgetInstanceException>
+exception classes based on L<Exception::Class::Base|Exception::Class::Base>.
+
 =head1 SUBROUTINES/METHODS
+
+All inherited from L<Exception::Class::Base|Exception::Class::Base/METHODS>.
 
 =head1 CONFIGURATION AND ENVIRONMENT
 
 =head1 DEPENDENCIES
+
+L<Exception::Class|Exception::Class>
 
 =head1 INCOMPATIBILITIES
 

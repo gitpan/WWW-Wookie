@@ -2,46 +2,56 @@ package WWW::Wookie::Server::Connection;  # -*- cperl; cperl-indent-level: 4 -*-
 use strict;
 use warnings;
 
-# $Id: Connection.pm 357 2010-11-07 10:53:18Z roland $
-# $Revision: 357 $
+# $Id: Connection.pm 365 2010-11-25 01:15:48Z roland $
+# $Revision: 365 $
 # $HeadURL: svn+ssh://ipenburg.xs4all.nl/srv/svnroot/barclay/trunk/lib/WWW/Wookie/Server/Connection.pm $
-# $Date: 2010-11-07 11:53:18 +0100 (Sun, 07 Nov 2010) $
+# $Date: 2010-11-25 02:15:48 +0100 (Thu, 25 Nov 2010) $
 
 use utf8;
 use 5.006000;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use Data::Dumper;
 use Moose qw/around has/;
+use Moose::Util::TypeConstraints qw/as coerce from where subtype via/;
 use URI;
 use LWP::UserAgent;
 use XML::Simple;
+
+use overload '""' => 'as_string';
 
 use Readonly;
 ## no critic qw(ProhibitCallsToUnexportedSubs)
 Readonly::Scalar my $EMPTY     => q{};
 Readonly::Scalar my $MORE_ARGS => 3;
 Readonly::Scalar my $ADVERTISE => q{advertise?all=true};
+Readonly::Scalar my $TIMEOUT   => 15;
+Readonly::Scalar my $AGENT     => q{WWW::Wookie/} . $VERSION;
 Readonly::Scalar my $SERVER_CONNECTION =>
   q{Wookie Server Connection - URL: %sAPI Key: %sShared Data Key: %s};
 ## use critic
 
+subtype 'Trailing' => as 'Str' => where { m{(^$|(/$))}gsmx };
+
+coerce 'Trailing' => from 'Str' => via { $_ =~ s{([^/])$}{$1/}gsmx; $_ };
+
 has _url => (
-    is     => 'rw',
-    isa    => 'Str',
+    is     => 'ro',
+    isa    => 'Trailing',
+    coerce => 1,
     reader => 'getURL',
 );
 
 has _api_key => (
-    is      => 'rw',
+    is      => 'ro',
     isa     => 'Str',
     default => q{TEST},
     reader  => 'getApiKey',
 );
 
 has _shared_data_key => (
-    is      => 'rw',
+    is      => 'ro',
     isa     => 'Str',
     default => q{mysharedkey},
     reader  => 'getSharedDataKey',
@@ -49,20 +59,23 @@ has _shared_data_key => (
 
 sub as_string {
     my $self = shift;
-    return sprintf $SERVER_CONNECTION, $self->getURL, $self->getApiKey(),
-      $self->getSharedDataKey();
+    return sprintf $SERVER_CONNECTION, $self->getURL, $self->getApiKey,
+      $self->getSharedDataKey;
 }
 
 sub test {
     my $self = shift;
-    my $url  = $self->getURL();
+    my $url  = $self->getURL;
     if ( $url ne $EMPTY ) {
-        my $ua       = LWP::UserAgent->new();
+        my $ua = LWP::UserAgent->new(
+            timeout => $TIMEOUT,
+            agent   => $AGENT,
+        );
         my $response = $ua->get( $url . $ADVERTISE );
         if ( $response->is_success ) {
-            my $xs =
-              XML::Simple->new( ForceArray => 1, KeyAttr => 'identifier' );
-            my $xml_obj = $xs->XMLin( $response->content );
+            my $xml_obj =
+              XML::Simple->new( ForceArray => 1, KeyAttr => 'identifier' )
+              ->XMLin( $response->content );
             if ( exists $xml_obj->{widget} ) {
                 return 1;
             }
@@ -106,7 +119,7 @@ WWW::Wookie::Server::Connection - A connection to a Wookie server
 
 =head1 VERSION
 
-This document describes WWW::Wookie::Server::Connection version 0.0.2
+This document describes WWW::Wookie::Server::Connection version 0.03
 
 =head1 SYNOPSIS
 
@@ -177,9 +190,11 @@ Test the Wookie server connection.
 L<Data::Dumper|Data::Dumper>
 L<LWP::UserAgent|LWP::UserAgent>
 L<Moose|Moose>
+L<Moose::Util::TypeConstraints|Moose::Util::TypeConstraints>
 L<Readonly|Readonly>
 L<URI|URI>
 L<XML::Simple|XML::Simple>
+L<overload|overload>
 
 =head1 INCOMPATIBILITIES
 

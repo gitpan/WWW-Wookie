@@ -2,15 +2,15 @@
 use strict;
 use warnings;
 
-# $Id: TestWookieService.pl 355 2010-11-06 23:22:51Z roland $
-# $Revision: 355 $
+# $Id: TestWookieService.pl 365 2010-11-25 01:15:48Z roland $
+# $Revision: 365 $
 # $HeadURL: svn+ssh://ipenburg.xs4all.nl/srv/svnroot/barclay/trunk/scripts/TestWookieService.pl $
-# $Date: 2010-11-07 00:22:51 +0100 (Sun, 07 Nov 2010) $
+# $Date: 2010-11-25 02:15:48 +0100 (Thu, 25 Nov 2010) $
 
 use utf8;
 use 5.006000;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use CGI qw/:all/;
 use Data::Dumper qw/Dumper/;
@@ -83,12 +83,12 @@ sub main {
       WWW::Wookie::Connector::Service->new( $opts{server}, $API_KEY,
         $SHARED_DATA_KEY, $USER );
     $test->setLocale($LOCALE);
-    $test->getUser()->setLoginName($USER);
-    my @available_widgets = $test->getAvailableWidgets();
+    $test->getUser->setLoginName($USER);
+    my @available_widgets = $test->getAvailableWidgets;
 
     $res->add_content( $q->start_html($WOOKIE_TITLE) );
 
-    if ( !$test->getConnection()->test() ) {
+    if ( !$test->getConnection->test ) {
         $res->add_content( $ERROR . $q->br );
     }
 
@@ -98,7 +98,7 @@ sub main {
     for my $id (@IDS) {
         my %labels = ( $EMPTY => $NO_WIDGET );
         foreach my $widget ( @available_widgets ) {
-            $labels{ $widget->getIdentifier() } = $widget->getTitle();
+            $labels{ $widget->getIdentifier } = $widget->getTitle;
         }
         $res->add_content(
             $q->popup_menu(
@@ -118,15 +118,15 @@ sub main {
         if ( defined $q->param( $id->{id} )
             && $q->param( $id->{id} ) ne $EMPTY )
         {
-            $test->getUser()->setLoginName( $id->{login} );
+            $test->getUser->setLoginName( $id->{login} );
             my $widget = $test->getOrCreateInstance( $q->param( $id->{id} ) );
             if ($widget) {
                 $res->add_content(
                     $q->start_iframe(
                         {
-                            src    => $widget->getUrl(),
-                            width  => $widget->getWidth(),
-                            height => $widget->getHeight(),
+                            src    => $widget->getUrl,
+                            width  => $widget->getWidth,
+                            height => $widget->getHeight,
                         }
                       )
                       . $q->end_iframe
@@ -148,8 +148,8 @@ sub main {
                       . $q->br
                       . $q->escapeHTML(
                         Data::Dumper::Dumper $test->getUsers($widget)
-                      )
-                      . $q->escapeHTML(
+                      ) .
+                      $q->escapeHTML(
                         Data::Dumper::Dumper $test->setProperty(
                             $widget,
                             WWW::Wookie::Widget::Property->new(
@@ -175,7 +175,7 @@ sub main {
     }
 
     $res->add_content(
-        $q->escapeHTML( Data::Dumper::Dumper( $test->WidgetInstances->get() ) )
+        $q->escapeHTML( Data::Dumper::Dumper( $test->WidgetInstances->get ) )
           . $q->end_pre
           . $q->end_html );
 
@@ -198,7 +198,7 @@ Framework Perl implementation
 
 =head1 VERSION
 
-This document describes C<TestWookieService.pl> version 0.0.2
+This document describes C<TestWookieService.pl> version 0.03
 
 =head1 USAGE
 

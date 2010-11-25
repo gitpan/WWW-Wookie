@@ -10,6 +10,7 @@ lib/WWW/Wookie/Connector/Service/Interface.pm
 lib/WWW/Wookie/Connector/Service.pm
 lib/WWW/Wookie/Server/Connection.pm
 lib/WWW/Wookie/User.pm
+lib/WWW/Wookie/Widget/Category.pm
 lib/WWW/Wookie/Widget/Instance.pm
 lib/WWW/Wookie/Widget/Instances.pm
 lib/WWW/Wookie/Widget/Property.pm
@@ -18,6 +19,9 @@ scripts/TestWookieService.pl
 t/00_base.t
 t/00_dependencies.t
 t/00_signature.t
+t/01_live.t
+t/02_live_rest_api.t
+t/03_exceptions.t
 t/09_pod.t
 t/10_pod-coverage.t
 t/11_test-coverage.t
@@ -26,4 +30,5 @@ t/13_critic.t
 t/14_kwalitee.t
 t/15_spell.t
 t/perlcriticrc
+t/rt.t
 META.yml                                 Module meta-data (added by MakeMaker)

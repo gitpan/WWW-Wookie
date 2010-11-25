@@ -22,8 +22,10 @@ WriteMakefile(
         Readonly                     => 0,
         Regexp::Common               => 0,
         URI                          => 0,
+        URI::Escape                  => 0,
         XML::Simple                  => 0,
         namespace::autoclean         => 0,
+        overload                     => 0,
     },
     ( $ExtUtils::MakeMaker::VERSION >= 6.56 ?
           (

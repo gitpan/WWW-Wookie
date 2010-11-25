@@ -3,16 +3,16 @@ use strict;
 use warnings;
 
 ## no critic qw(ProhibitLongLines)
-# $Id: Wookie.pm 354 2010-11-06 16:24:17Z roland $
-# $Revision: 354 $
+# $Id: Wookie.pm 365 2010-11-25 01:15:48Z roland $
+# $Revision: 365 $
 # $HeadURL: svn+ssh://ipenburg.xs4all.nl/srv/svnroot/barclay/trunk/lib/WWW/Wookie.pm $
-# $Date: 2010-11-06 17:24:17 +0100 (Sat, 06 Nov 2010) $
+# $Date: 2010-11-25 02:15:48 +0100 (Thu, 25 Nov 2010) $
 ## use critic
 
 use utf8;
 use 5.006000;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 1;
 
@@ -20,7 +20,7 @@ __END__
 
 =encoding utf8
 
-=for stopwords Roland van Ipenburg Wookie Readonly PHP
+=for stopwords Roland van Ipenburg Wookie Readonly PHP URI
 
 =head1 NAME
 
@@ -28,23 +28,22 @@ WWW::Wookie - Apache Wookie Connector Framework implementation
 
 =head1 VERSION
 
-This document describes WWW::Wookie version 0.0.2
+This document describes WWW::Wookie version 0.03
 
 =head1 SYNOPSIS
 
-    use WWW::Wookie;
+    use WWW::Wookie::Connector::Service;
 
     $w = WWW::Wookie::Connector::Service->new(
         $SERVER, $API_KEY, $SHARED_DATA_KEY, $USER
     );
-    %available_widgets = $w->getAvailableWidgets();
+    @available_widgets = $w->getAvailableWidgets;
 
 =head1 DESCRIPTION
 
 This is a Perl implementation of the Wookie Connector Framework. For more
 information see:
-L<http://incubator.apache.org/wookie/embedding-wookie-widgets-in-other-applications.html|
-http://incubator.apache.org/wookie/embedding-wookie-widgets-in-other-applications.html>
+L<http://incubator.apache.org/wookie/embedding-wookie-widgets-in-other-applications.html|http://incubator.apache.org/wookie/embedding-wookie-widgets-in-other-applications.html>
 
 =head1 SUBROUTINES/METHODS
 
@@ -55,38 +54,36 @@ L<http://incubator.apache.org/wookie|http://incubator.apache.org/wookie>.
 
 =head1 DEPENDENCIES
 
+L<Exception::Class|Exception::Class>
+L<HTTP::Headers|HTTP::Headers>
+L<HTTP::Request|HTTP::Request>
 L<HTTP::Request::Common|HTTP::Request::Common>
-L<HTTP::Response|HTTP::Response>
 L<HTTP::Status|HTTP::Status>
 L<LWP::UserAgent|LWP::UserAgent>
 L<Log::Log4perl|Log::Log4perl>
-L<MooseX::AttributeHelpers|MooseX::AttributeHelpers>
 L<Moose|Moose>
+L<Moose::Role|Moose::Role>
+L<Moose::Util::TypeConstraints|Moose::Util::TypeConstraints>
+L<MooseX::AttributeHelpers|MooseX::AttributeHelpers>
 L<Readonly|Readonly>
 L<Regexp::Common|Regexp::Common>
-L<Test::More|Test::More>
-L<Test::More|Test::More>
-L<Test::NoWarnings|Test::NoWarnings>
+L<URI|URI>
+L<URI::Escape|URI::Escape>
 L<XML::Simple|XML::Simple>
 L<namespace::autoclean|namespace::autoclean>
+L<Test::More|Test::More>
+L<Test::NoWarnings|Test::NoWarnings>
 
 =head1 INCOMPATIBILITIES
 
 This is a port based on the PHP version of the Wookie Connector Framework, not
-a port of the reference Java version of the Wookie Connector Framework. 
+a port of the reference Java version of the Wookie Connector Framework.
 
 =head1 DIAGNOSTICS
 
 This module uses L<Log::Log4perl|Log::Log4perl> for logging.
 
 =head1 BUGS AND LIMITATIONS
-
-Testing is only done manually and interactively using the
-L<scripts/TestWookieService.pl|
-http://search.cpan.org/~ipenburg/WWW-Wookie-0.02/scripts/TestWookieService.pl>
-script that has to connect to a live Wookie server. Issues can be caused by
-this Connector Framework, the test script, the Wookie server or the widgets
-served by the Wookie server, which could all be considered works in progress.
 
 Please report any bugs or feature requests at L<RT for
 rt.cpan.org|https://rt.cpan.org/Dist/Display.html?Queue=WWW-Wookie>.

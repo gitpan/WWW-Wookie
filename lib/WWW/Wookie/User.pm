@@ -2,15 +2,15 @@ package WWW::Wookie::User;    # -*- cperl; cperl-indent-level: 4 -*-
 use strict;
 use warnings;
 
-# $Id: User.pm 357 2010-11-07 10:53:18Z roland $
-# $Revision: 357 $
+# $Id: User.pm 360 2010-11-22 13:03:01Z roland $
+# $Revision: 360 $
 # $HeadURL: svn+ssh://ipenburg.xs4all.nl/srv/svnroot/barclay/trunk/lib/WWW/Wookie/User.pm $
-# $Date: 2010-11-07 11:53:18 +0100 (Sun, 07 Nov 2010) $
+# $Date: 2010-11-22 14:03:01 +0100 (Mon, 22 Nov 2010) $
 
 use utf8;
 use 5.006000;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use Moose qw/around has/;
 use Moose::Util::TypeConstraints qw/as coerce from where subtype via/;
@@ -22,7 +22,7 @@ Readonly::Scalar my $UNKNOWN   => q{UNKNOWN};
 Readonly::Scalar my $MORE_ARGS => 3;
 ## use critic
 
-subtype 'Trimmed' => as 'Str' => where { m{(^\S|\S*$)}gsmx };
+subtype 'Trimmed' => as 'Str' => where { m{(^$|(^\S|\S$))}gsmx };
 
 coerce 'Trimmed' => from 'Str' => via { $_ =~ s{^\s+(.*)\s+$}{$1}gsmx; $_ };
 
@@ -89,7 +89,7 @@ WWW::Wookie::User - represent a possible user of a widget
 
 =head1 VERSION
 
-This document describes WWW::Wookie::User version 0.0.2
+This document describes WWW::Wookie::User version 0.03
 
 =head1 SYNOPSIS
 

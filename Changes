@@ -1,5 +1,11 @@
 Revision history for Perl extension WWW::Wookie.
 
+0.03  Thu Nov  25 02:18:04 2010
+    - overloaded stringification of a server connection
+    - added widget service categories
+    - graceful handling of server URL without trailing slash (RT#63231)
+    - added more tests
+
 0.02  Sun Nov   7 12:05:02 2010
     - added build requirements
     - WWW::Wookie::Connector::Service method getAvailableWidgets returns an

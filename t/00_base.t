@@ -1,7 +1,7 @@
-# $Id: 00_base.t 350 2010-11-05 22:04:49Z roland $
-# $Revision: 350 $
+# $Id: 00_base.t 362 2010-11-23 23:06:49Z roland $
+# $Revision: 362 $
 # $HeadURL: svn+ssh://ipenburg.xs4all.nl/srv/svnroot/barclay/trunk/t/00_base.t $
-# $Date: 2010-11-05 23:04:49 +0100 (Fri, 05 Nov 2010) $
+# $Date: 2010-11-24 00:06:49 +0100 (Wed, 24 Nov 2010) $
 
 use Test::More;
 use Test::NoWarnings;
@@ -10,6 +10,7 @@ BEGIN {
     %MAIN::methods = (
         'WWW::Wookie::Widget' =>
           [qw(getIdentifier getTitle getDescription getIcon)],
+        'WWW::Wookie::Widget::Category' => [qw(getName get put)],
         'WWW::Wookie::Widget::Instance' => [
             qw(getUrl setUrl getIdentifier setIdentifier getTitle setTitle getHeight setHeight getWidth setHeight)
         ],
@@ -29,10 +30,11 @@ BEGIN {
     foreach my $methods ( values %MAIN::methods ) {
         $total_methods += @$methods;
     }
-    plan tests => 1 + 10 + ( 7 * 2 ) + $total_methods + 1 + 1;
+    plan tests => 1 + 11 + ( 8 * 2 ) + $total_methods + 1 + 1;
     ok(1);    # If we made it this far, we're ok.
     use_ok('WWW::Wookie');
     use_ok('WWW::Wookie::Widget');
+    use_ok('WWW::Wookie::Widget::Category');
     use_ok('WWW::Wookie::Widget::Instance');
     use_ok('WWW::Wookie::Widget::Instances');
     use_ok('WWW::Wookie::Widget::Property');
@@ -43,6 +45,7 @@ BEGIN {
     use_ok('WWW::Wookie::User');
 }
 new_ok('WWW::Wookie::Widget');
+new_ok('WWW::Wookie::Widget::Category');
 new_ok('WWW::Wookie::Widget::Instance');
 new_ok('WWW::Wookie::Widget::Instances');
 new_ok('WWW::Wookie::Widget::Property');
@@ -53,6 +56,8 @@ new_ok('WWW::Wookie::User');
 my $sub;
 @WWW::Wookie::Widget::Sub::ISA           = qw(WWW::Wookie::Widget);
 $sub                                     = new_ok('WWW::Wookie::Widget::Sub');
+@WWW::Wookie::Widget::Category::Sub::ISA = qw(WWW::Wookie::Widget::Category);
+$sub = new_ok('WWW::Wookie::Widget::Category::Sub');
 @WWW::Wookie::Widget::Instance::Sub::ISA = qw(WWW::Wookie::Widget::Instance);
 $sub = new_ok('WWW::Wookie::Widget::Instance::Sub');
 @WWW::Wookie::Widget::Instances::Sub::ISA = qw(WWW::Wookie::Widget::Instances);
